@@ -1,0 +1,63 @@
+// 程序设计语言原理 Final Project 示例文件
+// 本文件可以直接作为 transpiler.py 的输入。
+//
+// 已实现的语言功能：
+// 1. Rust 风格 Option：Some(int)、None、is_some、is_none。
+// 2. match Option：支持 Some(x) 与 None 两个分支，并生成 C 的条件表达式。
+// 3. 数组与 for_each 风格查找：find([..], target) 返回 Option。
+// 4. 函数式编程：支持把函数赋值给变量，例如 let double = fn(x) { x * 2 }。
+// 5. 简单闭包：支持函数返回函数，例如 let add = fn(a) { fn(b) { a + b } }。
+// 6. Lambda 形式：支持 let triple = fn x => x * 3。
+//
+// 期望输出写在每个表达式后面的注释中，评分时可以在这些功能范围内修改示例。
+
+let x = Some(10)
+let y = None
+
+is_some(x)
+// => true
+is_none(y)
+// => true
+
+let a = Some(10)
+let matched = match a {
+    Some(v) => v + 1
+    None => 0
+}
+matched
+// => 11
+
+find(arr, target) {
+    for_each(x in arr) {
+        if (x > target) {
+            return Some(x)
+        }
+    }
+    None
+}
+
+let found = find([1, 3, 5, 2, 4], 3)
+found
+// => Some(5)
+
+let missing = find([1, 2, 3], 5)
+missing
+// => None
+
+let double = fn(x) {
+    x * 2
+}
+double(10)
+// => 20
+
+let add = fn(a) {
+    fn(b) {
+        a + b
+    }
+}
+add(3)(4)
+// => 7
+
+let triple = fn x => x * 3
+triple(7)
+// => 21
